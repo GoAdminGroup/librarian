@@ -19,6 +19,8 @@ github.com/GoAdminGroup/librarian v0.0.0-20200413035633-22b491a688de h1:oSprtOqh
 github.com/GoAdminGroup/librarian v0.0.0-20200413035633-22b491a688de/go.mod h1:H3161Jm5n7HkUI7AAr9TJYpuxkLN5PrdQXe+4FMoOq4=
 github.com/GoAdminGroup/librarian v0.0.0-20200422164741-1522a1adf994 h1:nnPxwqMYTfV5N/DpoNElKtljtTdSMNlwCkixjDphgrQ=
 github.com/GoAdminGroup/librarian v0.0.0-20200422164741-1522a1adf994/go.mod h1:XYLCXuTPEUskGuP7wM54Lh4TeSZaA0cnynpF5Ughajs=
+github.com/GoAdminGroup/librarian v0.0.0-20200422170226-db535f919d52 h1:q5l5OI5pT4Qk9j0GV16P+pLAPyDmDbswDgGB/CaFWRQ=
+github.com/GoAdminGroup/librarian v0.0.0-20200422170226-db535f919d52/go.mod h1:XYLCXuTPEUskGuP7wM54Lh4TeSZaA0cnynpF5Ughajs=
 github.com/GoAdminGroup/librarian v0.0.1 h1:jKNApkERtcfU8AGQK35glVhilQoSBUVl0lZ96KSpI6E=
 github.com/GoAdminGroup/librarian v0.0.1/go.mod h1:H3161Jm5n7HkUI7AAr9TJYpuxkLN5PrdQXe+4FMoOq4=
 github.com/GoAdminGroup/themes v0.0.30-0.20200412131615-60d8ce976795 h1:S1yhf3iarFODRBN6XqjW97HFmuqh8nFSA9krYH2unjY=
