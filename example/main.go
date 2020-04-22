@@ -56,12 +56,12 @@ func main() {
 		//	Type: "fadeInUp",
 		//},
 		CustomHeadHtml: `<style>
-.navbar.navbar-static-top {
+.navbar.navbar-static-top, .fa.fa-file-o  {
 	display:none;
 }
 .navigation-box {
-    position: fixed;
-    width: 260px;
+   position: fixed;
+   width: 260px;
 }
 </style>`,
 	}
@@ -86,7 +86,7 @@ func main() {
 		user := models.User().SetConn(conn).Find(3)
 		_ = auth.SetCookie(ctx, user, conn)
 		ctx.Redirect("/admin/librarian/def/view/README")
-	}, false)
+	}, true)
 
 	go func() {
 		_ = r.Run(":9033")

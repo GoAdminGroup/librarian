@@ -91,6 +91,7 @@ func (*Default) CSS() template.CSS {
     font-weight: 700;
     text-overflow: ellipsis;
     overflow: hidden;
+	margin-bottom: 9px;
 }
 .navigation-box {
     padding: 20px 6px 20px 6px;
@@ -102,11 +103,14 @@ func (*Default) CSS() template.CSS {
     list-style: none;
 }
 .navigation-box ul a {
-	color: black;
+	color: #656565;
 }
 .navigation-box ul li {
     margin-bottom: 5px;
-	padding: 0 .8rem;
+	padding: 0 .9rem;
+}
+.navigation-box ul li:hover {
+    color: #4190ff;
 }
 @media screen and (max-height: 450px) {
 	.navigation-box {
