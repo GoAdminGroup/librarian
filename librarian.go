@@ -16,6 +16,7 @@ type Librarian struct {
 	*plugins.Base
 
 	roots root.Roots
+	theme string
 
 	handler *controller.Handler
 	guard   *guard.Guardian
@@ -36,12 +37,14 @@ func NewLibrarian(rootPath string, titles ...string) *Librarian {
 	return &Librarian{
 		Base:  &plugins.Base{PlugName: Name},
 		roots: root.Roots{"def": root.Root{Path: rootPath, Title: title}},
+		theme: "default",
 	}
 }
 
 type Config struct {
 	Path  string
 	Title string
+	Theme string
 }
 
 func NewLibrarianWithConfig(cfg Config) *Librarian {
@@ -54,9 +57,14 @@ func NewLibrarianWithConfig(cfg Config) *Librarian {
 		cfg.Title = Name
 	}
 
+	if cfg.Theme == "" {
+		cfg.Theme = "default"
+	}
+
 	return &Librarian{
 		Base:  &plugins.Base{PlugName: Name},
 		roots: root.Roots{"def": root.Root{Path: cfg.Path, Title: cfg.Title}},
+		theme: cfg.Theme,
 	}
 }
 
@@ -66,7 +74,7 @@ func (l *Librarian) InitPlugin(srv service.List) {
 	l.InitBase(srv)
 
 	l.Conn = db.GetConnection(srv)
-	l.handler = controller.NewHandler(l.roots)
+	l.handler = controller.NewHandler(l.roots, l.theme)
 	l.guard = guard.New(l.roots, l.Conn)
 	l.App = l.initRouter(srv)
 	l.handler.HTML = l.HTML

@@ -4,8 +4,8 @@ import (
 	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/guard"
+	"github.com/GoAdminGroup/librarian/modules/theme"
 	"gopkg.in/russross/blackfriday.v2"
-	"html/template"
 	"io/ioutil"
 )
 
@@ -22,14 +22,8 @@ func (h *Handler) View(ctx *context.Context) {
 	md := blackfriday.Run(content)
 
 	h.HTML(ctx, types.Panel{
-		Content: `
-<div class="markdown-viewer" style="
-    padding: 20px;
-    margin: auto;
-    width: 94%;
-    background-color: #FFFFFF;
-    min-height: 800px;
-">` + template.HTML(md) + `</div>
-`,
+		Content: theme.Get(h.theme).HTML(md),
+		CSS:     theme.Get(h.theme).CSS(),
+		JS:      theme.Get(h.theme).JS(),
 	}, false, true)
 }

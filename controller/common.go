@@ -9,13 +9,15 @@ import (
 
 type Handler struct {
 	roots root.Roots
+	theme string
 
 	HTML func(ctx *context.Context, panel types.Panel, animation ...bool)
 }
 
-func NewHandler(root root.Roots) *Handler {
+func NewHandler(root root.Roots, theme string) *Handler {
 	return &Handler{
 		roots: root,
+		theme: theme,
 	}
 }
 

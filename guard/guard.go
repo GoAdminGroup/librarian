@@ -44,7 +44,7 @@ func (g *Guardian) GetPrefix(ctx *context.Context) string {
 func (g *Guardian) getPaths(ctx *context.Context) (string, string, error) {
 	var (
 		err          error
-		relativePath = strings.Replace(ctx.Path(), config.Url("/librarian/"+ctx.Query("__prefix")+"/view"), "", -1)
+		relativePath = strings.Replace(ctx.Path(), config.Url("/librarian/"+ctx.Query("__prefix")+"/view"), "", -1) + ".md"
 		path         = filepath.Join(g.roots.GetPathFromPrefix(ctx), relativePath)
 	)
 
