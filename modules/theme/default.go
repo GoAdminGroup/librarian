@@ -52,8 +52,24 @@ func (*Default) HTML(md []byte) template.HTML {
 `
 }
 
+//position: fixed;
+//top: 20px;
+//width: 260px;
+
+func (*Default) JS() template.JS {
+	return `
+window.addEventListener("scroll", function () {
+	// var scroH = $(document).scrollTop();
+	console.log("scroll....");
+});
+`
+}
+
 func (*Default) CSS() template.CSS {
 	return `
+.content {
+    padding: 0px;
+}
 .markdown-wrapper {
 	padding-top: 20px; 
 	width: 100%;

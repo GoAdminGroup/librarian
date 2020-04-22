@@ -1,6 +1,11 @@
 package main
 
 import (
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"io/ioutil"
 	"log"
 	"os"
@@ -38,14 +43,27 @@ func main() {
 			Path:   "./uploads",
 			Prefix: "uploads",
 		},
-		Language:           language.EN,
-		IndexUrl:           "/librarian/def/view/README.md",
-		Debug:              true,
-		AccessAssetsLogOff: true,
-		Theme:              "sword",
-		Animation: config.PageAnimation{
-			Type: "fadeInUp",
-		},
+		Language:                 language.EN,
+		IndexUrl:                 "/librarian/def/view/README",
+		Debug:                    true,
+		AccessAssetsLogOff:       true,
+		HideConfigCenterEntrance: true,
+		HideAppInfoEntrance:      true,
+		Logo:                     "<b>Li</b>brarian",
+		MiniLogo:                 "Li",
+		Theme:                    "sword",
+		//Animation: config.PageAnimation{
+		//	Type: "fadeInUp",
+		//},
+		CustomHeadHtml: `<style>
+.navbar.navbar-static-top {
+	display:none;
+}
+.navigation-box {
+    position: fixed;
+    width: 260px;
+}
+</style>`,
 	}
 
 	dir, err := os.Getwd()
@@ -54,14 +72,21 @@ func main() {
 	}
 
 	if err := e.AddConfig(cfg).
-		AddPlugins(librarian.
-			NewLibrarian(filepath.Join(dir, "docs")),
-		).
+		AddNavButtons("Menu", "", action.Jump("/admin/menu")).
+		AddNavButtons("", icon.Pencil, action.Jump("/admin/menu")).
+		AddPlugins(librarian.NewLibrarian(filepath.Join(dir, "docs"))).
 		Use(r); err != nil {
 		panic(err)
 	}
 
 	r.Static("/uploads", "./uploads")
+
+	e.Data("GET", "/admin/librarian", func(ctx *context.Context) {
+		conn := e.SqliteConnection()
+		user := models.User().SetConn(conn).Find(3)
+		_ = auth.SetCookie(ctx, user, conn)
+		ctx.Redirect("/admin/librarian/def/view/README")
+	}, false)
 
 	go func() {
 		_ = r.Run(":9033")

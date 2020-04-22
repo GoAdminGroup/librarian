@@ -25,5 +25,5 @@ func (h *Handler) View(ctx *context.Context) {
 		Content: theme.Get(h.theme).HTML(md),
 		CSS:     theme.Get(h.theme).CSS(),
 		JS:      theme.Get(h.theme).JS(),
-	}, false, true)
+	}, true, true)
 }
