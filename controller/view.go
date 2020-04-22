@@ -5,7 +5,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/guard"
 	"github.com/GoAdminGroup/librarian/modules/theme"
-	"gopkg.in/russross/blackfriday.v2"
+	"github.com/russross/blackfriday/v2"
 	"io/ioutil"
 )
 

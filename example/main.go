@@ -1,11 +1,6 @@
 package main
 
 import (
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
-	"github.com/GoAdminGroup/go-admin/template/icon"
-	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"io/ioutil"
 	"log"
 	"os"
@@ -16,9 +11,14 @@ import (
 	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
 	_ "github.com/GoAdminGroup/themes/sword"
 
+	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
 	"github.com/GoAdminGroup/go-admin/modules/config"
 	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"github.com/GoAdminGroup/librarian"
 	"github.com/gin-gonic/gin"
 )
