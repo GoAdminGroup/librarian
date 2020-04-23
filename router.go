@@ -30,5 +30,7 @@ func (l *Librarian) initRouter(srv service.List) *context.App {
 		})
 	}
 
+	authRoute.GET("/librarian/write", l.handler.Write)
+
 	return app
 }
