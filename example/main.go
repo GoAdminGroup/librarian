@@ -3,8 +3,8 @@ package main
 import (
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
 	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
-	"github.com/GoAdminGroup/librarian/modules/theme"
 	_ "github.com/GoAdminGroup/themes/sword"
+
 	"io/ioutil"
 	"log"
 	"os"
@@ -19,6 +19,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
 	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"github.com/GoAdminGroup/librarian"
+	"github.com/GoAdminGroup/librarian/modules/theme"
 	"github.com/gin-gonic/gin"
 )
 
