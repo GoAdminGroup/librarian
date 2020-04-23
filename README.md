@@ -17,5 +17,6 @@ visit: [http://localhost:9033/admin/librarian](http://localhost:9033/admin/libra
 
 ## TODO
 
-- 文档加密
-- 编辑新建文档
+- [ ] 文档加密
+- [ ] 编辑新建文档
+- [ ] 实时监听nav.yml
