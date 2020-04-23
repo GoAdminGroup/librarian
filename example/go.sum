@@ -11,6 +11,8 @@ github.com/GoAdminGroup/go-admin v1.2.9 h1:wLFhbtSmeHaMgN7qdrzo1ZtTcwS3LyZAVEZTf
 github.com/GoAdminGroup/go-admin v1.2.9/go.mod h1:7T4oDolkEtLJNnkdZqqENr2ehcxzy0XWQUnuZ8Ym0uE=
 github.com/GoAdminGroup/go-admin v1.2.10-0.20200422164548-6dee16a7cc29 h1:uE48gYGEkhJA3GZQOmoueLgJGksP7CiQHX/FGTs+oXg=
 github.com/GoAdminGroup/go-admin v1.2.10-0.20200422164548-6dee16a7cc29/go.mod h1:7T4oDolkEtLJNnkdZqqENr2ehcxzy0XWQUnuZ8Ym0uE=
+github.com/GoAdminGroup/go-admin v1.2.10-0.20200423020059-beef3ec4cf5d h1:H/Mvj95lila/Jm17aUCdFaARW4i02im2BWplkM70rxg=
+github.com/GoAdminGroup/go-admin v1.2.10-0.20200423020059-beef3ec4cf5d/go.mod h1:7T4oDolkEtLJNnkdZqqENr2ehcxzy0XWQUnuZ8Ym0uE=
 github.com/GoAdminGroup/html v0.0.1 h1:SdWNWl4OKPsvDk2GDp5ZKD6ceWoN8n4Pj6cUYxavUd0=
 github.com/GoAdminGroup/html v0.0.1/go.mod h1:A1laTJaOx8sQ64p2dE8IqtstDeCNBHEazrEp7hR5VvM=
 github.com/GoAdminGroup/librarian v0.0.0-20200412234012-aa85b38c4745 h1:z4Jn/R5i6N547p3tVIz8ANaNJ7a7/EIT4TqFGEyCQ1A=
