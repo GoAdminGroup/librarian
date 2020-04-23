@@ -47,6 +47,8 @@ github.com/GoAdminGroup/themes v0.0.31 h1:HrvSHY7L4m3XPp9lKg/+GOk65teiPlC0tZa8MO
 github.com/GoAdminGroup/themes v0.0.31/go.mod h1:ABCOeBeibfg9DxAsGVa1NzYK9/nIbHT/BuFrCRIKo8A=
 github.com/GoAdminGroup/themes v0.0.32-0.20200422164456-d4cd0675c5ff h1:LTs0KUBYxe/Fn8czboPtyrphsoeVMH3jjwUjAnbtlTA=
 github.com/GoAdminGroup/themes v0.0.32-0.20200422164456-d4cd0675c5ff/go.mod h1:ABCOeBeibfg9DxAsGVa1NzYK9/nIbHT/BuFrCRIKo8A=
+github.com/GoAdminGroup/themes v0.0.32-0.20200423100635-56e5f0249c34 h1:2+wPzlB5BCZVZm02hFE2KN3iFw/YOrnL6vGzJakSbak=
+github.com/GoAdminGroup/themes v0.0.32-0.20200423100635-56e5f0249c34/go.mod h1:ABCOeBeibfg9DxAsGVa1NzYK9/nIbHT/BuFrCRIKo8A=
 github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e h1:n+DcnTNkQnHlwpsrHoQtkrJIO7CBx029fw6oR4vIob4=
 github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e/go.mod h1:Bdzq+51GR4/0DIhaICZEOm+OHvXGwwB2trKZ8B4Y6eQ=
 github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d h1:G0m3OIz70MZUWq3EgK3CesDbo8upS2Vm9/P3FtgI+Jk=
