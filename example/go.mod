@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/GoAdminGroup/go-admin v1.2.10-0.20200422164548-6dee16a7cc29
-	github.com/GoAdminGroup/librarian v0.0.0-20200422170226-db535f919d52
+	github.com/GoAdminGroup/librarian v0.0.0-20200423042925-d9a0f07d4e4b
 	github.com/GoAdminGroup/themes v0.0.32-0.20200422164456-d4cd0675c5ff
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/gin-gonic/gin v1.6.2
