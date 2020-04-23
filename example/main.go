@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/GoAdminGroup/filemanager"
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
 	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
 	_ "github.com/GoAdminGroup/themes/sword"
@@ -19,7 +20,6 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
 	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"github.com/GoAdminGroup/librarian"
-	"github.com/GoAdminGroup/librarian/modules/theme"
 	"github.com/gin-gonic/gin"
 )
 
@@ -59,7 +59,7 @@ func main() {
 		//},
 	}
 
-	theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
+	//theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
 
 	dir, err := os.Getwd()
 	if err != nil {
@@ -70,12 +70,13 @@ func main() {
 
 	if err := e.AddConfig(cfg).
 		AddNavButtons("Menu", "", action.Jump("/admin/menu")).
+		AddNavButtons("Files", "", action.Jump("/admin/fm/def/list")).
 		//AddNavButtons("", icon.Pencil, action.Jump("/admin/menu")).
 		AddPlugins(librarian.NewLibrarianWithConfig(librarian.Config{
 			Path:           filepath.Join(dir, "docs"),
 			MenuUserRoleID: visitorRoleID,
 			BuildMenu:      false,
-		})).
+		}), filemanager.NewFileManager(filepath.Join(dir, "docs"))).
 		Use(r); err != nil {
 		panic(err)
 	}
