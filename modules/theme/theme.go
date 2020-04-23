@@ -130,12 +130,17 @@ func (base *Base) CSS() template.CSS {
 }
 
 func (base *Base) JS() template.JS {
-	js := template.JS(`
+	js := template.JS(``)
+
+	if config.ChangeTitle {
+		js += template.JS(`
 let titleH1 = $(".markdown-viewer h1");
 if (titleH1.length > 0 && $(titleH1[0]).text() !== "") {
 	document.title = $(titleH1[0]).text();
 }
 `)
+	}
+
 	if config.FixedSidebar {
 		return js + `
 $('.main-sidebar').css('position', 'fixed');
@@ -158,6 +163,7 @@ type Config struct {
 	HideNavBar   bool
 	HideMenuIcon bool
 	FixedSidebar bool
+	ChangeTitle  bool
 }
 
 var config Config
