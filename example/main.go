@@ -4,6 +4,7 @@ import (
 	"github.com/GoAdminGroup/filemanager"
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
 	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
+	"github.com/GoAdminGroup/librarian/modules/theme"
 	_ "github.com/GoAdminGroup/themes/sword"
 
 	"io/ioutil"
@@ -59,7 +60,7 @@ func main() {
 		//},
 	}
 
-	//theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
+	theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
 
 	dir, err := os.Getwd()
 	if err != nil {
