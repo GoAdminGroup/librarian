@@ -2,7 +2,7 @@
 
 A GoAdmin plugin which see markdown docs.
 
-![](http://quick.go-admin.cn/docs/librarian_interface.png)
+![](http://quick.go-admin.cn/docs/librarian_interface_2.png)
 
 ## How To
 
