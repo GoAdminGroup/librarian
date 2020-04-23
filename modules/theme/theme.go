@@ -21,3 +21,14 @@ var themes = map[string]Theme{
 func Get(name string) Theme {
 	return themes[name]
 }
+
+type Config struct {
+	HideNavBar   bool
+	HideMenuIcon bool
+}
+
+var config Config
+
+func Set(c Config) {
+	config = c
+}

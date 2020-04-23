@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/GoAdminGroup/librarian/modules/theme"
 	"io/ioutil"
 	"log"
 	"os"
@@ -17,7 +18,6 @@ import (
 	"github.com/GoAdminGroup/go-admin/modules/config"
 	"github.com/GoAdminGroup/go-admin/modules/language"
 	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
-	"github.com/GoAdminGroup/go-admin/template/icon"
 	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"github.com/GoAdminGroup/librarian"
 	"github.com/gin-gonic/gin"
@@ -43,38 +43,35 @@ func main() {
 			Path:   "./uploads",
 			Prefix: "uploads",
 		},
-		Language:                 language.EN,
-		IndexUrl:                 "/librarian/def/view/README",
-		Debug:                    true,
-		AccessAssetsLogOff:       true,
-		HideConfigCenterEntrance: true,
-		HideAppInfoEntrance:      true,
-		Logo:                     "<b>Li</b>brarian",
-		MiniLogo:                 "Li",
-		Theme:                    "sword",
+		Language:                      language.EN,
+		IndexUrl:                      "/librarian/def/view/README",
+		Debug:                         true,
+		AccessAssetsLogOff:            true,
+		HideConfigCenterEntrance:      true,
+		HideAppInfoEntrance:           true,
+		HideVisitorUserCenterEntrance: true,
+		Logo:                          "<b>Li</b>brarian",
+		MiniLogo:                      "Li",
+		Theme:                         "sword",
+		Title:                         "Librarian",
 		//Animation: config.PageAnimation{
 		//	Type: "fadeInUp",
 		//},
-		CustomHeadHtml: `<style>
-.navbar.navbar-static-top, .fa.fa-file-o  {
-	display:none;
-}
-.navigation-box {
-   position: fixed;
-   width: 260px;
-}
-</style>`,
 	}
+
+	theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
 
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
 
+	const visitorRoleID = int64(3)
+
 	if err := e.AddConfig(cfg).
 		AddNavButtons("Menu", "", action.Jump("/admin/menu")).
-		AddNavButtons("", icon.Pencil, action.Jump("/admin/menu")).
-		AddPlugins(librarian.NewLibrarian(filepath.Join(dir, "docs"))).
+		//AddNavButtons("", icon.Pencil, action.Jump("/admin/menu")).
+		AddPlugins(librarian.NewLibrarian(filepath.Join(dir, "docs"), visitorRoleID)).
 		Use(r); err != nil {
 		panic(err)
 	}
@@ -83,7 +80,7 @@ func main() {
 
 	e.Data("GET", "/admin/librarian", func(ctx *context.Context) {
 		conn := e.SqliteConnection()
-		user := models.User().SetConn(conn).Find(3)
+		user := models.User().SetConn(conn).Find(visitorRoleID)
 		_ = auth.SetCookie(ctx, user, conn)
 		ctx.Redirect("/admin/librarian/def/view/README")
 	}, true)

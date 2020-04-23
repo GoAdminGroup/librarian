@@ -23,15 +23,19 @@ func (*Default) HTML(md []byte) template.HTML {
 	mdstring := string(md)
 
 	if len(allHeader) > 0 {
+		boxContent = `
+<div class="col-sm-3">
+<div class="navigation-box">
+<label class="navigation-title">` + language.GetHTML("Table of contents") + `</label><ul>
+`
 		toReplace := make([]string, len(allHeader)*2)
-		boxContent = `<label class="navigation-title">` + language.GetHTML("Table of contents") + `</label><ul>`
 		for i := 0; i < len(allHeader); i++ {
 			toReplace[i*2] = string(allHeader[i][0])
 			is := strconv.Itoa(i)
 			toReplace[i*2+1] = `<h2 id="_` + is + `">` + string(allHeader[i][1]) + "</h2>"
 			boxContent += `<a href="#_` + template.HTML(is) + `"><li>` + template.HTML(allHeader[i][1]) + "</li></a>"
 		}
-		boxContent += "</ul>"
+		boxContent += "</ul></div></div>"
 		replacer := strings.NewReplacer(toReplace...)
 		mdstring = replacer.Replace(mdstring)
 	}
@@ -42,11 +46,7 @@ func (*Default) HTML(md []byte) template.HTML {
 		<div class="col-sm-9"> 
 			<div class="markdown-viewer">` + template.HTML(mdstring) + `</div>
 		</div>
-		<div class="col-sm-3">
-			<div class="navigation-box">
-				` + boxContent + `
-			</div>
-		</div>
+		` + boxContent + `
 	</div>
 </div>
 `
@@ -66,7 +66,26 @@ window.addEventListener("scroll", function () {
 }
 
 func (*Default) CSS() template.CSS {
-	return `
+
+	css := template.CSS("")
+
+	if config.HideMenuIcon {
+		css += `
+.sidebar-menu .fa.fa-file-o  {
+	display:none;
+}
+`
+	}
+
+	if config.HideNavBar {
+		css += `
+.navbar.navbar-static-top {
+	display:none;
+}
+`
+	}
+
+	return css + `
 .content {
     padding: 0px;
 }
@@ -81,7 +100,7 @@ func (*Default) CSS() template.CSS {
 }
 .markdown-viewer {
 	margin: auto;
-	padding: 20px;
+	padding: 10px 35px 20px 35px;
     background-color: #FFFFFF;
     min-height: 500px;
 }
@@ -92,6 +111,9 @@ func (*Default) CSS() template.CSS {
     text-overflow: ellipsis;
     overflow: hidden;
 	margin-bottom: 9px;
+}
+.markdown-viewer img {
+	width: 100%;
 }
 .navigation-box {
     padding: 20px 6px 20px 6px;
