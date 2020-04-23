@@ -60,7 +60,7 @@ func main() {
 		//},
 	}
 
-	theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true})
+	theme.Set(theme.Config{HideNavBar: true, HideMenuIcon: true, FixedSidebar: true})
 
 	dir, err := os.Getwd()
 	if err != nil {

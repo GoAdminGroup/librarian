@@ -130,14 +130,19 @@ func (base *Base) CSS() template.CSS {
 }
 
 func (base *Base) JS() template.JS {
-	return `
+	js := template.JS(`
 let titleH1 = $(".markdown-viewer h1");
 if (titleH1.length > 0 && $(titleH1[0]).text() !== "") {
 	document.title = $(titleH1[0]).text();
 }
+`)
+	if config.FixedSidebar {
+		return js + `
 $('.main-sidebar').css('position', 'fixed');
 $('.main-header .logo').css('position', 'fixed');
 `
+	}
+	return js
 }
 
 var themes = map[string]Theme{
@@ -152,6 +157,7 @@ func Get(name string) Theme {
 type Config struct {
 	HideNavBar   bool
 	HideMenuIcon bool
+	FixedSidebar bool
 }
 
 var config Config
