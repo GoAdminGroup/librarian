@@ -135,6 +135,8 @@ let titleH1 = $(".markdown-viewer h1");
 if (titleH1.length > 0 && $(titleH1[0]).text() !== "") {
 	document.title = $(titleH1[0]).text();
 }
+$('.main-sidebar').css('position', 'fixed');
+$('.main-header .logo').css('position', 'fixed');
 `
 }
 
