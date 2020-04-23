@@ -52,10 +52,6 @@ func (*Default) HTML(md []byte) template.HTML {
 `
 }
 
-//position: fixed;
-//top: 20px;
-//width: 260px;
-
 func (*Default) JS() template.JS {
 	return `
 window.addEventListener("scroll", function () {
