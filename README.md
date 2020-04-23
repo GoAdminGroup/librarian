@@ -14,3 +14,8 @@ GO111MODULE=on go run main.go
 ```
 
 visit: [http://localhost:9033/admin/librarian](http://localhost:9033/admin/librarian)
+
+## TODO
+
+- 文档加密
+- 编辑新建文档
