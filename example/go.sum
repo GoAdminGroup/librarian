@@ -25,6 +25,8 @@ github.com/GoAdminGroup/librarian v0.0.0-20200423042925-d9a0f07d4e4b h1:tkU8UVL4
 github.com/GoAdminGroup/librarian v0.0.0-20200423042925-d9a0f07d4e4b/go.mod h1:XYLCXuTPEUskGuP7wM54Lh4TeSZaA0cnynpF5Ughajs=
 github.com/GoAdminGroup/librarian v0.0.0-20200423044801-46167f6e8e89 h1:AxI7RVf9cHJGbZ+CiMcLKuBKfz8XnfVmBhc9mJioqFU=
 github.com/GoAdminGroup/librarian v0.0.0-20200423044801-46167f6e8e89/go.mod h1:XYLCXuTPEUskGuP7wM54Lh4TeSZaA0cnynpF5Ughajs=
+github.com/GoAdminGroup/librarian v0.0.0-20200423071226-d561e24b3a26 h1:ILMfR+oGsmUoLi+3htamch/vq6zzKwtuEhGpr1mJQ+E=
+github.com/GoAdminGroup/librarian v0.0.0-20200423071226-d561e24b3a26/go.mod h1:XYLCXuTPEUskGuP7wM54Lh4TeSZaA0cnynpF5Ughajs=
 github.com/GoAdminGroup/librarian v0.0.1 h1:jKNApkERtcfU8AGQK35glVhilQoSBUVl0lZ96KSpI6E=
 github.com/GoAdminGroup/librarian v0.0.1/go.mod h1:H3161Jm5n7HkUI7AAr9TJYpuxkLN5PrdQXe+4FMoOq4=
 github.com/GoAdminGroup/themes v0.0.30-0.20200412131615-60d8ce976795 h1:S1yhf3iarFODRBN6XqjW97HFmuqh8nFSA9krYH2unjY=
