@@ -1,9 +1,8 @@
 # 项目架构
----
-
 GoAdmin的项目模块如下：
 
-|  模块名   | 模块功能  | 模块位置  | 
+
+|  模块名   | 模块功能  | 模块位置  |
 |  ----  | ----  | ----  |
 | engine  | engine是GoAdmin最核心的模块，此模块的功能是利用web框架适配器将插件的路由与控制器方法的映射关系注入到框架中 | ./engine/engine.go
 | adapter  | adapter的功能是实现web框架的context与GoAdmin的context的相互转换 | ./adapter/adapter.go

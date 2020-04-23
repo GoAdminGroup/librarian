@@ -1,55 +1,11 @@
 package theme
 
 import (
-	"github.com/GoAdminGroup/librarian/modules/language"
 	"html/template"
-	"regexp"
-	"strconv"
-	"strings"
 )
 
 type Default struct {
 	Base
-}
-
-func (*Default) HTML(md []byte) template.HTML {
-
-	reg, _ := regexp.Compile("<h2>(.*)</h2>")
-
-	allHeader := reg.FindAllSubmatch(md, -1)
-
-	boxContent := template.HTML("")
-
-	mdstring := string(md)
-
-	if len(allHeader) > 0 {
-		boxContent = `
-<div class="col-sm-3">
-<div class="navigation-box">
-<label class="navigation-title">` + language.GetHTML("Table of contents") + `</label><ul>
-`
-		toReplace := make([]string, len(allHeader)*2)
-		for i := 0; i < len(allHeader); i++ {
-			toReplace[i*2] = string(allHeader[i][0])
-			is := strconv.Itoa(i)
-			toReplace[i*2+1] = `<h2 id="_` + is + `">` + string(allHeader[i][1]) + "</h2>"
-			boxContent += `<a href="#_` + template.HTML(is) + `"><li>` + template.HTML(allHeader[i][1]) + "</li></a>"
-		}
-		boxContent += "</ul></div></div>"
-		replacer := strings.NewReplacer(toReplace...)
-		mdstring = replacer.Replace(mdstring)
-	}
-
-	return `
-<div class="markdown-wrapper">
-	<div class="row markdown-row">
-		<div class="col-sm-9"> 
-			<div class="markdown-viewer">` + template.HTML(mdstring) + `</div>
-		</div>
-		` + boxContent + `
-	</div>
-</div>
-`
 }
 
 func (*Default) JS() template.JS {
@@ -65,79 +21,42 @@ if (titleH1.length > 0 && $(titleH1[0]).text() !== "") {
 `
 }
 
-func (*Default) CSS() template.CSS {
+func (d *Default) CSS() template.CSS {
 
-	css := template.CSS("")
-
-	if config.HideMenuIcon {
-		css += `
-.sidebar-menu .fa.fa-file-o  {
-	display:none;
+	return d.Base.CSS() + `
+.markdown-viewer table {
+  	padding: 0;
+  	word-break: initial;
+	margin-bottom: 13px;
 }
-`
-	}
-
-	if config.HideNavBar {
-		css += `
-.navbar.navbar-static-top {
-	display:none;
+.markdown-viewer table tr {
+  border-top: 1px solid #dadfe6;
+  margin: 0;
+  padding: 0
 }
-`
-	}
-
-	return css + `
-.content {
-    padding: 0px;
+.markdown-viewer table.md-table tr:nth-child(2n) {
+  background-color: #fafbfc
 }
-.markdown-wrapper {
-	padding-top: 20px; 
-	width: 100%;
-	padding-bottom: 20px;
+.markdown-viewer table tr th {
+  font-weight: 400;
+  border: 1px solid #dadfe6;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px
 }
-.markdown-row {
-    width: 98%;
-    margin: auto;
+.markdown-viewer table tr td {
+  border: 1px solid #dadfe6;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px
 }
-.markdown-viewer {
-	margin: auto;
-	padding: 10px 35px 20px 35px;
-    background-color: #FFFFFF;
-    min-height: 500px;
+.markdown-viewer table tr td:first-child,
+.markdown-viewer table tr th:first-child {
+  margin-top: 0
 }
-.navigation-title {
-	display: block;
-    padding: 0 .7rem;
-    font-weight: 700;
-    text-overflow: ellipsis;
-    overflow: hidden;
-	margin-bottom: 9px;
-}
-.markdown-viewer img {
-	width: 100%;
-}
-.navigation-box {
-    padding: 20px 6px 20px 6px;
-    background-color: #fff;
-}
-.navigation-box ul {
-	margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.navigation-box ul a {
-	color: #656565;
-}
-.navigation-box ul li {
-    margin-bottom: 5px;
-	padding: 0 .9rem;
-}
-.navigation-box ul li:hover {
-    color: #4190ff;
-}
-@media screen and (max-height: 450px) {
-	.navigation-box {
-		display: none;
-	}
+.markdown-viewer table tr td:last-child,
+.markdown-viewer table tr th:last-child {
+  margin-bottom: 0
 }
 `
 }

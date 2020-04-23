@@ -1,6 +1,4 @@
 # 适配器
----
-
 适配器的作用是实现web框架context与GoAdmin自身context的转换。
 开发一个adapter需要实现以下接口方法：
 

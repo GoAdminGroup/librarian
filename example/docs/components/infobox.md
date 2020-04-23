@@ -1,6 +1,4 @@
 # InfoBox
----
-
 InfoBox 定义如下：
 
 ```go

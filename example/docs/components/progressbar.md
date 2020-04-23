@@ -1,6 +1,4 @@
 # Progress Group
----
-
 ProgressGroup 定义如下：
 
 ```go

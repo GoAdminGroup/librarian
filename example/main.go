@@ -1,16 +1,15 @@
 package main
 
 import (
+	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
 	"github.com/GoAdminGroup/librarian/modules/theme"
+	_ "github.com/GoAdminGroup/themes/sword"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
 	"path/filepath"
-
-	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
-	_ "github.com/GoAdminGroup/themes/sword"
 
 	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/engine"
@@ -71,7 +70,11 @@ func main() {
 	if err := e.AddConfig(cfg).
 		AddNavButtons("Menu", "", action.Jump("/admin/menu")).
 		//AddNavButtons("", icon.Pencil, action.Jump("/admin/menu")).
-		AddPlugins(librarian.NewLibrarian(filepath.Join(dir, "docs"), visitorRoleID)).
+		AddPlugins(librarian.NewLibrarianWithConfig(librarian.Config{
+			Path:           filepath.Join(dir, "docs"),
+			MenuUserRoleID: visitorRoleID,
+			BuildMenu:      false,
+		})).
 		Use(r); err != nil {
 		panic(err)
 	}

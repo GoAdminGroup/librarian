@@ -1,6 +1,4 @@
 # 更改登录界面
----
-
 自定义登录界面教程：[http://discuss.go-admin.com/t/goadmin/53](http://discuss.go-admin.com/t/goadmin/53)
 
 通过组件的方式可以修改登录界面，如下例子：

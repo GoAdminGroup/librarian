@@ -48,7 +48,7 @@ func NewLibrarian(rootPath string, menuUserRoleID ...int64) *Librarian {
 	return &Librarian{
 		Base:           &plugins.Base{PlugName: Name},
 		roots:          root.Roots{"def": root.Root{Path: rootPath, Title: Name}},
-		theme:          "default",
+		theme:          "github",
 		buildMenu:      true,
 		menuUserRoleID: uid,
 	}
@@ -73,7 +73,7 @@ func NewLibrarianWithConfig(cfg Config) *Librarian {
 	}
 
 	if cfg.Theme == "" {
-		cfg.Theme = "default"
+		cfg.Theme = "github"
 	}
 
 	return &Librarian{

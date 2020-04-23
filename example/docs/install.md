@@ -1,6 +1,4 @@
 # 准备工作
----
-
 本程序是基于```golang```，推荐使用版本高于```golang 1.11```，具体请访问：[https://golang.org](https://golang.org)
 
 #### 导入程序所需sql到对应自建数据库中
