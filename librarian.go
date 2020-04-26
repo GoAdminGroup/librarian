@@ -272,10 +272,10 @@ func (l *Librarian) setMenu(prefix, navPath string, has bool) error {
 
 	if len(ids) > 0 {
 		if has {
-			_, err := l.siteTable().Update(dialect.H{
-				"key":   siteMenuIDsKey(prefix),
-				"value": strings.Join(ids, ","),
-			})
+			_, err := l.siteTable().Where("key", "=", siteMenuIDsKey(prefix)).
+				Update(dialect.H{
+					"value": strings.Join(ids, ","),
+				})
 			if db.CheckError(err, db.INSERT) {
 				logger.Fatal(err)
 			}
