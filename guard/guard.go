@@ -11,14 +11,16 @@ import (
 )
 
 type Guardian struct {
-	conn  db.Connection
-	roots root.Roots
+	conn   db.Connection
+	roots  root.Roots
+	prefix string
 }
 
-func New(r root.Roots, c db.Connection) *Guardian {
+func New(r root.Roots, c db.Connection, p string) *Guardian {
 	return &Guardian{
-		roots: r,
-		conn:  c,
+		roots:  r,
+		conn:   c,
+		prefix: p,
 	}
 }
 
@@ -44,7 +46,7 @@ func (g *Guardian) GetPrefix(ctx *context.Context) string {
 func (g *Guardian) getPaths(ctx *context.Context) (string, string, error) {
 	var (
 		err          error
-		relativePath = strings.Replace(ctx.Path(), config.Url("/librarian/"+ctx.Query("__prefix")+"/view"), "", -1) + ".md"
+		relativePath = strings.Replace(ctx.Path(), config.Url("/"+g.prefix), "", -1) + ".md"
 		path         = filepath.Join(g.roots.GetPathFromPrefix(ctx), relativePath)
 	)
 

@@ -23,14 +23,14 @@ func (l *Librarian) initRouter(srv service.List) *context.App {
 
 			if !info.IsDir() && filepath.Ext(path) == ".md" {
 				path = replacer.Replace(path)
-				authRoute.GET("/librarian/:__prefix/view"+filepath.ToSlash(path), l.guard.View, l.handler.View)
+				authRoute.GET("/"+l.prefix+"/"+filepath.ToSlash(path), l.guard.View, l.handler.View)
 			}
 
 			return nil
 		})
 	}
 
-	authRoute.GET("/librarian/:__prefix/write", l.handler.Write)
+	authRoute.GET("/"+l.prefix+"/write", l.handler.Write)
 
 	return app
 }

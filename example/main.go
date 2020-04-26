@@ -1,10 +1,8 @@
 package main
 
 import (
-	"github.com/GoAdminGroup/filemanager"
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
 	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
-	"github.com/GoAdminGroup/librarian/modules/theme"
 	_ "github.com/GoAdminGroup/themes/sword"
 
 	"io/ioutil"
@@ -13,6 +11,7 @@ import (
 	"os/signal"
 	"path/filepath"
 
+	"github.com/GoAdminGroup/filemanager"
 	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/engine"
 	"github.com/GoAdminGroup/go-admin/modules/auth"
@@ -21,6 +20,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
 	"github.com/GoAdminGroup/go-admin/template/types/action"
 	"github.com/GoAdminGroup/librarian"
+	"github.com/GoAdminGroup/librarian/modules/theme"
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,7 +45,7 @@ func main() {
 			Prefix: "uploads",
 		},
 		Language:                      language.EN,
-		IndexUrl:                      "/librarian/def/view/README",
+		IndexUrl:                      "/librarian/README",
 		Debug:                         true,
 		AccessAssetsLogOff:            true,
 		HideConfigCenterEntrance:      true,
@@ -55,6 +55,7 @@ func main() {
 		MiniLogo:                      "Li",
 		Theme:                         "sword",
 		Title:                         "Librarian",
+		//ExcludeThemeComponents:        []string{"datatable", "form"},
 		//Animation: config.PageAnimation{
 		//	Type: "fadeInUp",
 		//},
@@ -81,7 +82,7 @@ func main() {
 		AddPlugins(librarian.NewLibrarianWithConfig(librarian.Config{
 			Path:           filepath.Join(dir, "docs"),
 			MenuUserRoleID: visitorRoleID,
-			BuildMenu:      false,
+			BuildMenu:      true,
 		}), filemanager.NewFileManager(filepath.Join(dir, "docs"))).
 		Use(r); err != nil {
 		panic(err)
@@ -93,7 +94,7 @@ func main() {
 		conn := e.SqliteConnection()
 		user := models.User().SetConn(conn).Find(visitorRoleID)
 		_ = auth.SetCookie(ctx, user, conn)
-		ctx.Redirect("/admin/librarian/def/view/README")
+		ctx.Redirect("/admin/librarian/README")
 	}, true)
 
 	go func() {

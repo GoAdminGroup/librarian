@@ -1,8 +1,8 @@
 package root
 
 import (
-	"github.com/GoAdminGroup/librarian/modules/error"
 	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/librarian/modules/error"
 )
 
 type Root struct {
@@ -26,6 +26,9 @@ func (r Roots) GetTitleFromPrefix(ctx *context.Context) string {
 
 func (r Roots) GetFromPrefix(ctx *context.Context) Root {
 	prefix := ctx.Query("__prefix")
+	if prefix == "" {
+		prefix = "def"
+	}
 	if root, ok := r[prefix]; ok {
 		return root
 	}
