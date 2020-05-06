@@ -53,7 +53,7 @@ func NewLibrarian(rootPath string, menuUserRoleID ...int64) *Librarian {
 		theme:          "github",
 		buildMenu:      true,
 		menuUserRoleID: uid,
-		prefix:         "librarian",
+		prefix:         Name,
 	}
 }
 
