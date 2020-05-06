@@ -305,6 +305,33 @@ func (l *Librarian) setMenu(prefix, navPath string, has bool) error {
 	return nil
 }
 
+type Menu struct {
+	Name string
+	Path string
+}
+
+func (l *Librarian) GetFirstMenu() Menu {
+	buildMenus, err := l.siteTable().
+		Where("key", "=", siteMenuIDsKey("def")).
+		First()
+	if db.CheckError(err, db.QUERY) {
+		logger.Error("librarian get first menu id error", err)
+		return Menu{}
+	}
+	if buildMenus == nil {
+		return Menu{}
+	}
+	firstMenu, err := l.menuTable().Find(strings.Split(buildMenus["value"].(string), ",")[0])
+	if db.CheckError(err, db.QUERY) {
+		logger.Error("librarian get first menu error", err)
+		return Menu{}
+	}
+	return Menu{
+		Name: firstMenu["title"].(string),
+		Path: firstMenu["uri"].(string),
+	}
+}
+
 func (l *Librarian) menuTable() *db.SQL {
 	return db.WithDriver(l.Conn).Table("goadmin_menu")
 }

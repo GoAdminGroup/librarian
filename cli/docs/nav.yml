@@ -1,0 +1,43 @@
+nav:
+  - 介绍: README.md
+  - 准备工作: install.md
+  - 快速开始: quick_start.md
+  - 插件:
+      - 插件的使用: plugins/plugins.md
+      - Admin插件使用: plugins/admin.md
+  - Admin插件:
+      - 数据表格:
+          - 基本使用: admin/table/basic.md
+          - 列的使用: admin/table/column_usage.md
+      - 数据表单:
+          - 基本使用: admin/form/basic.md
+          - 表单组件: admin/form/components.md
+      - 设置菜单: admin/menus.md
+      - 权限管理: admin/rbac.md
+      - 模块: admin/module.md
+      - 使用新主题: admin/theme.md
+      - 文件上传: admin/file.md
+      - 命令行工具: admin/cli.md
+      - 自定义管理用户表: admin/auth.md
+      - 设置cdn: admin/cdn.md
+  - Monitor插件: monitor/monitor.md
+  - ui组件介绍:
+      - 目录: components/components.md
+      - infobox: components/infobox.md
+      - chartjs: components/chartjs.md
+      - progressgroup: components/progressbar.md
+  - 页面介绍:
+      - 页面模块化: pages/modules.md
+      - 自定义页面: pages/pages.md
+      - 修改登录界面: pages/login.md
+  - ci测试: tests/ci.md
+  - 项目架构:
+      - 架构介绍: architecture/introduction.md
+  - 项目开发:
+      - 代码规范: development/code_style.md
+      - 适配器: development/adapter.md
+      - 插件: development/plugins.md
+  - 模板开发:
+      - 模板介绍: development/template/template.md
+      - 组件开发: development/template/components.md
+  - 发展规划: plan.md
