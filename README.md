@@ -8,9 +8,10 @@ A GoAdmin plugin which see markdown docs.
 
 ### CLI
 
-- download the cli
-- download the database
-- run
+- download the [cli](https://github.com/GoAdminGroup/librarian/releases/tag/v0.0.1)
+- download the [database](https://github.com/GoAdminGroup/librarian/releases/download/v0.0.1/librarian.db) and put the db in your project folder
+- set up nav.yml in your docs folder, here is an [example](https://github.com/GoAdminGroup/librarian/blob/master/cli/docs/nav.yml)
+- run:
 
 ```bash
 ./librarian --port=9055 --path=./docs
@@ -32,6 +33,6 @@ visit: [http://localhost:9033/admin/librarian](http://localhost:9033/admin/libra
 
 ## TODO
 
-- [ ] 文档加密
-- [ ] 编辑新建文档
-- [ ] 实时监听nav.yml
+- [ ] Document encryption
+- [ ] Edit the new document
+- [ ] Real-time monitor nav. Yml
