@@ -150,7 +150,7 @@ func (l *Librarian) InitMenu() {
 			m5 := md5.New()
 			m5.Write(b)
 			m5res := hex.EncodeToString(m5.Sum(nil))
-			if m5res == checkNavContent["value"].(string) && buildMenus != nil {
+			if checkNavContent != nil && m5res == checkNavContent["value"].(string) && buildMenus != nil {
 				continue
 			}
 

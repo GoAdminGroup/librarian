@@ -5,6 +5,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/guard"
 	"github.com/GoAdminGroup/librarian/modules/theme"
+	"github.com/GoAdminGroup/librarian/modules/util"
 	"github.com/russross/blackfriday/v2"
 	"io/ioutil"
 )
@@ -19,7 +20,7 @@ func (h *Handler) View(ctx *context.Context) {
 		panic(err)
 	}
 
-	md := blackfriday.Run(content)
+	md := blackfriday.Run(util.NormalizeEOL(content))
 
 	h.HTML(ctx, types.Panel{
 		Content: theme.Get(h.theme).HTML(md),

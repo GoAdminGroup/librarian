@@ -82,6 +82,7 @@ func main() {
 		AddPlugins(librarian.NewLibrarianWithConfig(librarian.Config{
 			Path:           filepath.Join(dir, "docs"),
 			MenuUserRoleID: visitorRoleID,
+			Prefix:         "librarian",
 			BuildMenu:      true, // auto build menus
 		}), filemanager.NewFileManager(filepath.Join(dir, "docs"))).
 		Use(r); err != nil {

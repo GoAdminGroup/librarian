@@ -1,14 +1,8 @@
 package util
 
 import (
-	"fmt"
-	"golang.org/x/tools/godoc/util"
-	"io"
-	"mime"
-	"mime/multipart"
+	"bytes"
 	"os"
-	"path/filepath"
-	"strings"
 )
 
 func FileExist(path string) bool {
@@ -19,106 +13,38 @@ func FileExist(path string) bool {
 	return true
 }
 
-func IsDirectory(filename string) bool {
-	info, err := os.Stat(filename)
-	if err != nil {
-		return false
+// NormalizeEOL will convert Windows (CRLF) and Mac (CR) EOLs to UNIX (LF)
+func NormalizeEOL(input []byte) []byte {
+	var right, left, pos int
+	if right = bytes.IndexByte(input, '\r'); right == -1 {
+		return input
 	}
-	return info.IsDir()
-}
+	length := len(input)
+	tmp := make([]byte, length)
 
-func IsFile(filename string) bool {
-	info, err := os.Stat(filename)
-	if err != nil {
-		return false
+	// We know that left < length because otherwise right would be -1 from IndexByte.
+	copy(tmp[pos:pos+right], input[left:left+right])
+	pos += right
+	tmp[pos] = '\n'
+	left += right + 1
+	pos++
+
+	for left < length {
+		if input[left] == '\n' {
+			left++
+		}
+
+		right = bytes.IndexByte(input[left:], '\r')
+		if right == -1 {
+			copy(tmp[pos:], input[left:])
+			pos += length - left
+			break
+		}
+		copy(tmp[pos:pos+right], input[left:left+right])
+		pos += right
+		tmp[pos] = '\n'
+		left += right + 1
+		pos++
 	}
-	return !info.IsDir()
-}
-
-func MkdirIfNotExist(path string) {
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		_ = os.Mkdir(path, os.ModePerm)
-	}
-}
-
-func MkFileIfNotExist(path string) {
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		_, _ = os.Create(path)
-	}
-}
-
-func UploadFileTo(fh *multipart.FileHeader, destDirectory string) (int64, error) {
-	src, err := fh.Open()
-	if err != nil {
-		return 0, err
-	}
-	defer src.Close()
-
-	out, err := os.OpenFile(filepath.Join(destDirectory, fh.Filename),
-		os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
-	if err != nil {
-		return 0, err
-	}
-	defer out.Close()
-
-	return io.Copy(out, src)
-}
-
-func IsTextFile(filepath string) bool {
-	f, err := os.Open(filepath)
-	if err != nil {
-		return false
-	}
-	defer f.Close()
-
-	var buf [1024]byte
-	n, err := f.Read(buf[0:])
-	if err != nil {
-		return false
-	}
-
-	return util.IsText(buf[0:n])
-}
-
-func Substr(s string, pos, length int) string {
-	runes := []rune(s)
-	l := pos + length
-	if l > len(runes) {
-		l = len(runes)
-	}
-	return string(runes[pos:l])
-}
-
-func GetParentDirectory(directory string) string {
-	return Substr(directory, 0, strings.LastIndex(directory, "/"))
-}
-
-func ParseFileContentType(fileName string) string {
-	contentType := mime.TypeByExtension(filepath.Ext(fileName))
-	if strings.HasPrefix(contentType, "text/") {
-		contentType = "text/plain"
-	}
-	return contentType
-}
-
-func IsHiddenFile(name string) bool {
-	if strings.TrimSpace(name) == "" {
-		return false
-	}
-
-	return strings.HasPrefix(name, ".")
-}
-
-func ByteCountIEC(b int) string {
-	const unit = 1024
-	if b < unit {
-		return fmt.Sprintf("%d B", b)
-	}
-	div, exp := unit, 0
-	for n := b / unit; n >= unit; n /= unit {
-		div *= unit
-		exp++
-	}
-	return fmt.Sprintf("%.1f %ciB",
-		float64(b)/float64(div), "KMGTPE"[exp])
+	return tmp[:pos]
 }
