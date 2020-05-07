@@ -6,6 +6,21 @@ A GoAdmin plugin which see markdown docs.
 
 ## How To
 
+### CLI
+
+- download the cli
+- download the database
+- run
+
+```bash
+./librarian --port=9055 --path=./docs
+```
+
+- visit: [http://localhost:9055/docs](http://localhost:9055/docs)
+
+
+### Use in your GoAdmin app
+
 An example: 
 
 ```
