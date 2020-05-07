@@ -27,6 +27,11 @@ import (
 
 func main() {
 
+	// TODO: installation
+	//
+	// 1. download the database
+	// 2. set librarian.yml
+
 	var (
 		dbPath, port, prefix, configPath, filePath, logo, miniLogo, title string
 		debug                                                             bool
