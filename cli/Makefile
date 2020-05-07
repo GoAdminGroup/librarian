@@ -1,7 +1,7 @@
 GOCMD = go
 GOBUILD = $(GOCMD) build
 BINARY_NAME = librarian
-VERSION = v0.0.1
+VERSION = v0.0.2
 LAST_VERSION = v0.0.1
 
 all: build-cli
