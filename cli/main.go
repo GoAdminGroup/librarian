@@ -34,7 +34,7 @@ func main() {
 
 	flag.BoolVar(&debug, "debug", false, "debug mode")
 	flag.StringVar(&dbPath, "db", "./admin.db", "db path")
-	flag.StringVar(&prefix, "prefix", "admin", "url prefix")
+	flag.StringVar(&prefix, "prefix", "docs", "url prefix")
 	flag.StringVar(&configPath, "config", "", "config path")
 	flag.StringVar(&filePath, "path", "", "file path")
 	flag.StringVar(&port, "port", "80", "http listen port")
@@ -134,7 +134,7 @@ func main() {
 
 	r.Static("/uploads", "./uploads")
 
-	e.Data("GET", "/"+prefix+"/librarian", func(ctx *context.Context) {
+	e.Data("GET", "/"+prefix, func(ctx *context.Context) {
 		ctx.Redirect(config.Url(indexURL))
 	}, true)
 

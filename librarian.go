@@ -80,10 +80,6 @@ func NewLibrarianWithConfig(cfg Config) *Librarian {
 		cfg.Theme = "github"
 	}
 
-	if cfg.Prefix == "" {
-		cfg.Prefix = "librarian"
-	}
-
 	return &Librarian{
 		Base:           &plugins.Base{PlugName: Name},
 		roots:          root.Roots{"def": root.Root{Path: cfg.Path, Title: cfg.Title}},
@@ -351,7 +347,13 @@ func siteMenuIDsKey(prefix string) string {
 func (l *Librarian) menuPath(prefix string, path interface{}) string {
 	p := strings.Replace(path.(string), ".md", "", -1)
 	if prefix == "def" {
-		return "/" + l.prefix + "/" + p
+		if l.prefix  != "" {
+			return "/" + l.prefix + "/" + p
+		}
+		return "/" + p
 	}
-	return "/" + l.prefix + "/" + p + "?__prefix=" + prefix
+	if l.prefix  != "" {
+		return "/" + l.prefix + "/" + p + "?__prefix=" + prefix
+	}
+	return "/" + p + "?__prefix=" + prefix
 }

@@ -1,6 +1,6 @@
 nav:
   - 介绍: README.md
-  - 准备工作: install.md
+  - 准备工作: installation.md
   - 快速开始: quick_start.md
   - 插件:
       - 插件的使用: plugins/plugins.md
