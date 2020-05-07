@@ -1,6 +1,8 @@
 package librarian
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"github.com/GoAdminGroup/go-admin/modules/db"
 	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
 	"github.com/GoAdminGroup/go-admin/modules/language"
@@ -129,18 +131,42 @@ func (l *Librarian) InitMenu() {
 				continue
 			}
 
+			checkNavContent, err := l.siteTable().
+				Where("key", "=", siteMenuNavKey(key)).
+				First()
+
+			if db.CheckError(err, db.QUERY) {
+				logger.Error("librarian check menu navs error", err)
+				continue
+			}
+
+			b, err := ioutil.ReadFile(navPath)
+
+			if err != nil {
+				logger.Error("librarian check menu navs read files error", err)
+				continue
+			}
+
+			m5 := md5.New()
+			m5.Write(b)
+			m5res := hex.EncodeToString(m5.Sum(nil))
+			if m5res == checkNavContent["value"].(string) && buildMenus != nil {
+				continue
+			}
+
 			if buildMenus == nil {
-				if err := l.setMenu(key, navPath, false); err != nil {
+				if err := l.setMenu(b, m5res, key, navPath, false, checkNavContent != nil); err != nil {
 					logger.Error("librarian set menu error", err)
 				}
 			} else {
+
 				// clear old menu
 				buildMenuIDs := strings.Split(buildMenus["value"].(string), ",")
 				buildMenuIDInterfaces := make([]interface{}, len(buildMenuIDs))
 				for i := 0; i < len(buildMenuIDs); i++ {
 					buildMenuIDInterfaces[i] = buildMenuIDs[i]
 				}
-				err := l.menuTable().WhereIn("id", buildMenuIDInterfaces).Delete()
+				err = l.menuTable().WhereIn("id", buildMenuIDInterfaces).Delete()
 				if db.CheckError(err, db.DELETE) {
 					logger.Error("librarian clear menu error", err)
 					continue
@@ -150,7 +176,7 @@ func (l *Librarian) InitMenu() {
 					logger.Error("librarian clear role menu error", err)
 					continue
 				}
-				if err := l.setMenu(key, navPath, true); err != nil {
+				if err := l.setMenu(b, m5res, key, navPath, true, checkNavContent != nil); err != nil {
 					logger.Error("librarian set menu error", err)
 				}
 			}
@@ -159,16 +185,11 @@ func (l *Librarian) InitMenu() {
 }
 
 // TODO: add transaction
-func (l *Librarian) setMenu(prefix, navPath string, has bool) error {
-	b, err := ioutil.ReadFile(navPath)
-
-	if err != nil {
-		return err
-	}
+func (l *Librarian) setMenu(b []byte, m5Str string, prefix, navPath string, has, has2 bool) error {
 
 	var navs = make(map[string]interface{})
 
-	err = yaml.Unmarshal(b, &navs)
+	err := yaml.Unmarshal(b, &navs)
 
 	if err != nil {
 		return err
@@ -284,6 +305,23 @@ func (l *Librarian) setMenu(prefix, navPath string, has bool) error {
 				logger.Fatal(err)
 			}
 		}
+		if has2 {
+			_, err := l.siteTable().Where("key", "=", siteMenuNavKey(prefix)).
+				Update(dialect.H{
+					"value": m5Str,
+				})
+			if db.CheckError(err, db.INSERT) {
+				logger.Fatal(err)
+			}
+		} else {
+			_, err := l.siteTable().Insert(dialect.H{
+				"key":   siteMenuNavKey(prefix),
+				"value": m5Str,
+			})
+			if db.CheckError(err, db.UPDATE) {
+				logger.Fatal(err)
+			}
+		}
 	}
 
 	if l.menuUserRoleID != int64(0) {
@@ -344,15 +382,19 @@ func siteMenuIDsKey(prefix string) string {
 	return "librarian_build_menu_" + prefix
 }
 
+func siteMenuNavKey(prefix string) string {
+	return "librarian_build_menu_" + prefix + "_nav"
+}
+
 func (l *Librarian) menuPath(prefix string, path interface{}) string {
 	p := strings.Replace(path.(string), ".md", "", -1)
 	if prefix == "def" {
-		if l.prefix  != "" {
+		if l.prefix != "" {
 			return "/" + l.prefix + "/" + p
 		}
 		return "/" + p
 	}
-	if l.prefix  != "" {
+	if l.prefix != "" {
 		return "/" + l.prefix + "/" + p + "?__prefix=" + prefix
 	}
 	return "/" + p + "?__prefix=" + prefix
