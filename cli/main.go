@@ -38,7 +38,7 @@ func main() {
 	)
 
 	flag.BoolVar(&debug, "debug", false, "debug mode")
-	flag.StringVar(&dbPath, "db", "./admin.db", "db path")
+	flag.StringVar(&dbPath, "db", "./librarian.db", "db path")
 	flag.StringVar(&prefix, "prefix", "docs", "url prefix")
 	flag.StringVar(&configPath, "config", "", "config path")
 	flag.StringVar(&filePath, "path", "", "file path")
