@@ -60,18 +60,22 @@ func NewLibrarian(rootPath string, menuUserRoleID ...int64) *Librarian {
 }
 
 type Config struct {
-	Path           string
-	Title          string
-	Theme          string
-	Prefix         string
-	BuildMenu      bool
-	MenuUserRoleID int64
+	Path           string `json:"path",yaml:"path",ini:"path"`
+	Title          string `json:"title",yaml:"title",ini:"title"`
+	Theme          string `json:"theme",yaml:"theme",ini:"theme"`
+	Prefix         string `json:"prefix",yaml:"prefix",ini:"prefix"`
+	BuildMenu      bool   `json:"build_menu",yaml:"build_menu",ini:"build_menu"`
+	MenuUserRoleID int64  `json:"menu_user_role_id",yaml:"menu_user_role_id",ini:"menu_user_role_id"`
 }
 
 func NewLibrarianWithConfig(cfg Config) *Librarian {
 
 	if cfg.Path == "" {
 		panic("librarian: create fail, wrong path")
+	}
+
+	if !util.FileExist(cfg.Path) {
+		panic("librarian: wrong directory path")
 	}
 
 	if cfg.Title == "" {
