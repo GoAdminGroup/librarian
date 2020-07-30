@@ -1,22 +1,24 @@
 package guard
 
 import (
+	"fmt"
+	"path/filepath"
+	"strings"
+
 	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/modules/config"
 	"github.com/GoAdminGroup/go-admin/modules/db"
 	"github.com/GoAdminGroup/librarian/modules/constant"
 	"github.com/GoAdminGroup/librarian/modules/root"
-	"path/filepath"
-	"strings"
 )
 
 type Guardian struct {
 	conn   db.Connection
-	roots  root.Roots
+	roots  *root.Roots
 	prefix string
 }
 
-func New(r root.Roots, c db.Connection, p string) *Guardian {
+func New(r *root.Roots, c db.Connection, p string) *Guardian {
 	return &Guardian{
 		roots:  r,
 		conn:   c,
@@ -43,12 +45,18 @@ func (g *Guardian) GetPrefix(ctx *context.Context) string {
 	return prefix
 }
 
+func (g *Guardian) Update(root *root.Roots) {
+	g.roots = root
+}
+
 func (g *Guardian) getPaths(ctx *context.Context) (string, string, error) {
 	var (
 		err          error
 		relativePath = strings.Replace(ctx.Path(), config.Url("/"+g.prefix), "", -1) + ".md"
 		path         = filepath.Join(g.roots.GetPathFromPrefix(ctx), relativePath)
 	)
+
+	fmt.Println("relativePath", relativePath, "g.prefix", g.prefix, "ctx.Path()", ctx.Path())
 
 	return relativePath, path, err
 }

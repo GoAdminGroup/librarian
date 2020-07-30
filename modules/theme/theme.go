@@ -1,11 +1,12 @@
 package theme
 
 import (
-	"github.com/GoAdminGroup/librarian/modules/language"
 	"html/template"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/GoAdminGroup/librarian/modules/language"
 )
 
 type Theme interface {
@@ -154,6 +155,8 @@ var themes = map[string]Theme{
 	"default": new(Default),
 	"github":  new(Github),
 }
+
+var AllThemes = []string{"default", "github"}
 
 func Get(name string) Theme {
 	return themes[name]

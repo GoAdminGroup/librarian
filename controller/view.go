@@ -1,13 +1,15 @@
 package controller
 
 import (
+	"io/ioutil"
+
 	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/plugins"
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/guard"
 	"github.com/GoAdminGroup/librarian/modules/theme"
 	"github.com/GoAdminGroup/librarian/modules/util"
 	"github.com/russross/blackfriday/v2"
-	"io/ioutil"
 )
 
 func (h *Handler) View(ctx *context.Context) {
@@ -26,5 +28,8 @@ func (h *Handler) View(ctx *context.Context) {
 		Content: theme.Get(h.theme).HTML(md),
 		CSS:     theme.Get(h.theme).CSS(),
 		JS:      theme.Get(h.theme).JS(),
-	}, true, true)
+	}, plugins.HTMLOptions{
+		NoCompress: true,
+		Animation:  true,
+	})
 }
