@@ -5,6 +5,9 @@ import "github.com/GoAdminGroup/go-admin/modules/language"
 var EN = language.LangSet{
 	"librarian.table of contents": "Table of contents",
 
+	"librarian.help you quickly build a online markdown viewer.": "Help you quickly build a online markdown viewer.",
+
+	"librarian.librarian":                       "Librarian",
 	"librarian.librarian installation":          "Librarian Installaction",
 	"librarian.install":                         "Installation",
 	"librarian.install success, please restart": "Install Success, please restart",

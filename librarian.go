@@ -161,16 +161,16 @@ var info = plugins.Info{
 	Website:     "http://www.go-admin.cn/plugins/detail/TzgE2RAYGqnCgEt7TK",
 	Title:       "Librarian",
 	Description: "Help you quickly build a online markdown viewer.",
-	Version:     "v0.0.3",
+	Version:     "v0.0.4",
 	Author:      "Official",
-	Url:         "https://github.com/GoAdminGroup/librarian/archive/v0.0.3.zip",
+	Url:         "https://github.com/GoAdminGroup/librarian/archive/v0.0.4.zip",
 	Cover:       "",
 	Agreement:   "",
 	Uuid:        "TzgE2RAYGqnCgEt7TK",
 	Name:        Name,
 	ModulePath:  "github.com/GoAdminGroup/librarian",
 	CreateDate:  utils.ParseTime("2020-04-19"),
-	UpdateDate:  utils.ParseTime("2020-07-30"),
+	UpdateDate:  utils.ParseTime("2020-08-02"),
 }
 
 func (l *Librarian) AddRoot(key string, value root.Root) *Librarian {

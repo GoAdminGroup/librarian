@@ -5,6 +5,9 @@ import "github.com/GoAdminGroup/go-admin/modules/language"
 var CN = language.LangSet{
 	"librarian.table of contents": "目录",
 
+	"librarian.help you quickly build a online markdown viewer.": "帮您一键搭建Markdown文档网站",
+
+	"librarian.librarian":                       "Markdown阅读器",
 	"librarian.librarian installation":          "Markdown阅读器安装",
 	"librarian.install":                         "安装",
 	"librarian.install success, please restart": "安装成功，重启生效",
