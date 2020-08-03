@@ -1,7 +1,6 @@
 package guard
 
 import (
-	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -55,8 +54,6 @@ func (g *Guardian) getPaths(ctx *context.Context) (string, string, error) {
 		relativePath = strings.Replace(ctx.Path(), config.Url("/"+g.prefix), "", -1) + ".md"
 		path         = filepath.Join(g.roots.GetPathFromPrefix(ctx), relativePath)
 	)
-
-	fmt.Println("relativePath", relativePath, "g.prefix", g.prefix, "ctx.Path()", ctx.Path())
 
 	return relativePath, path, err
 }
