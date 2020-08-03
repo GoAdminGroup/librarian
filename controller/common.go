@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/template"
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/modules/constant"
 	"github.com/GoAdminGroup/librarian/modules/root"
@@ -12,7 +12,7 @@ type Handler struct {
 	roots *root.Roots
 	theme string
 
-	HTML func(ctx *context.Context, panel types.Panel, options ...plugins.HTMLOptions)
+	HTML func(ctx *context.Context, panel types.Panel, options ...template.ExecuteOptions)
 }
 
 func NewHandler(root *root.Roots, theme string) *Handler {

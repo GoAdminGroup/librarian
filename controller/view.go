@@ -3,8 +3,9 @@ package controller
 import (
 	"io/ioutil"
 
+	"github.com/GoAdminGroup/go-admin/template"
+
 	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/plugins"
 	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/librarian/guard"
 	"github.com/GoAdminGroup/librarian/modules/theme"
@@ -28,7 +29,7 @@ func (h *Handler) View(ctx *context.Context) {
 		Content: theme.Get(h.theme).HTML(md),
 		CSS:     theme.Get(h.theme).CSS(),
 		JS:      theme.Get(h.theme).JS(),
-	}, plugins.HTMLOptions{
+	}, template.ExecuteOptions{
 		NoCompress: true,
 		Animation:  true,
 	})
