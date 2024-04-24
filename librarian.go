@@ -512,7 +512,7 @@ func (l *Librarian) GetSettingPage() table.Generator {
 			})
 		}
 
-		fileManagerConfiguration = table.NewDefaultTable(cfg)
+		fileManagerConfiguration = table.NewDefaultTable(ctx, cfg)
 
 		formList := fileManagerConfiguration.GetForm().
 			AddXssJsFilter().
